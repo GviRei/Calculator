@@ -6,23 +6,42 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity{
+import org.w3c.dom.Text;
 
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private TextView txt;
+    private String numbers = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        txt = (TextView) findViewById(R.id.textView);
         buttonOnClick();
     }
 
+
+
     public void buttonOnClick() {
         Button btn = (Button) findViewById(R.id.button);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TextView txt = (TextView) findViewById(R.id.textView);
-                txt.setText("1");
-            }
-        });
+        Button btn2 = (Button) findViewById(R.id.button2);
+        btn.setOnClickListener(this);
+        btn2.setOnClickListener(this);
+    }
+
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button:
+                numbers += "1";
+                txt.setText(numbers);
+                break;
+            case R.id.button2:
+                numbers += "2";
+                txt.setText(numbers);
+                break;
+        }
     }
 }
